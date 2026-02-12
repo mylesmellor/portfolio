@@ -3,7 +3,16 @@ const input = document.getElementById("todo-input");
 const list = document.getElementById("todo-list");
 const emptyState = document.getElementById("empty-state");
 
-let todos = JSON.parse(localStorage.getItem("todos")) || [];
+let todos = loadTodos();
+
+function loadTodos() {
+    try {
+        return JSON.parse(localStorage.getItem("todos")) || [];
+    } catch {
+        localStorage.removeItem("todos");
+        return [];
+    }
+}
 
 function saveTodos() {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -20,9 +29,11 @@ function createTodoElement(todo) {
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.checked = todo.completed;
+    checkbox.setAttribute("aria-label", "Mark \"" + todo.text + "\" as " + (todo.completed ? "incomplete" : "complete"));
     checkbox.addEventListener("change", () => {
         todo.completed = checkbox.checked;
         li.classList.toggle("completed", todo.completed);
+        checkbox.setAttribute("aria-label", "Mark \"" + todo.text + "\" as " + (todo.completed ? "incomplete" : "complete"));
         saveTodos();
     });
 
@@ -41,12 +52,13 @@ function createTodoElement(todo) {
     deleteBtn.className = "delete-btn";
     deleteBtn.textContent = "\u00d7";
     deleteBtn.title = "Delete task";
+    deleteBtn.setAttribute("aria-label", "Delete \"" + todo.text + "\"");
     deleteBtn.addEventListener("click", () => {
         li.style.opacity = "0";
         li.style.transform = "translateY(-8px)";
         li.style.transition = "all 0.2s ease-out";
         setTimeout(() => {
-            todos = todos.filter((t) => t !== todo);
+            todos = todos.filter((t) => t.id !== todo.id);
             li.remove();
             saveTodos();
             updateEmptyState();
@@ -68,7 +80,7 @@ form.addEventListener("submit", (e) => {
     const text = input.value.trim();
     if (!text) return;
 
-    const todo = { text, completed: false, createdAt: new Date().toISOString() };
+    const todo = { id: crypto.randomUUID(), text, completed: false, createdAt: new Date().toISOString() };
     todos.push(todo);
     list.appendChild(createTodoElement(todo));
     saveTodos();
