@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Fitness & Nutrition Planner</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      background: #0f0f11;
+      color: #fafafa;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+    }
+
+    .container {
+      max-width: 640px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: #a1a1aa;
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+
+    .screenshot {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid #27272a;
+      margin-bottom: 2rem;
+    }
+
+    .tags {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      background: rgba(109, 93, 252, 0.12);
+      color: #8577fd;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    h2 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    p, li {
+      color: #d4d4d8;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    ul {
+      list-style: disc;
+      padding-left: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    li { margin-bottom: 0.3rem; }
+
+    .code-block {
+      background: #18181b;
+      border: 1px solid #27272a;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      font-family: "Cascadia Code", "Fira Code", Consolas, monospace;
+      font-size: 0.85rem;
+      color: #e4e4e7;
+      margin: 1rem 0 1.5rem;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    .back {
+      display: inline-block;
+      margin-top: 2rem;
+      color: #6d5dfc;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .back:hover { color: #8577fd; }
+    .back::before { content: "\2190 "; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AI Fitness & Nutrition Planner</h1>
+    <p class="subtitle">Personalised weekly workout plans, meals, and shopping lists powered by GPT-4o-mini.</p>
+
+    <div class="tags">
+      <span class="tag">Python</span>
+      <span class="tag">Streamlit</span>
+      <span class="tag">OpenAI</span>
+    </div>
+
+    <img class="screenshot" src="../../assets/screenshots/ai-fitness-planner.png" alt="App screenshot">
+
+    <h2>Features</h2>
+    <ul>
+      <li>Log daily fitness &amp; nutrition metrics (weight, steps, sleep, macros)</li>
+      <li>Set personal preferences (goals, diet type, calorie targets, allergies)</li>
+      <li>Generate AI-powered weekly plans with structured workouts and meal plans</li>
+      <li>Auto-generated shopping list grouped by category</li>
+      <li>Manual JSON paste fallback if you prefer using your own AI</li>
+    </ul>
+
+    <h2>How to run</h2>
+    <p>This is a Python app that runs locally with Streamlit:</p>
+    <div class="code-block">cd "projects/ai fitness planner"
+pip install -r requirements.txt
+streamlit run app.py</div>
+    <p>Then open <strong>http://localhost:8501</strong> in your browser.</p>
+
+    <h2>Setup</h2>
+    <p>Create a file at <code>.streamlit/secrets.toml</code> with your OpenAI key:</p>
+    <div class="code-block">OPENAI_API_KEY = "sk-..."</div>
+
+    <a class="back" href="../../index.html">Back to portfolio</a>
+  </div>
+</body>
+</html>
