@@ -18,6 +18,14 @@ const projects = [
     tags: ["HTML", "CSS", "JavaScript"],
   },
   {
+    title: "OpenAI Chatbot Demo",
+    description:
+      "A streaming chatbot built with FastAPI and the OpenAI Responses API. Supports assistant, strict, and FAQ modes with session memory.",
+    screenshot: null,
+    url: "https://github.com/mylesmellor/portfolio/tree/main/projects/openai%20-%20chatbot%20-%20demo",
+    tags: ["Python", "FastAPI", "OpenAI"],
+  },
+  {
     title: "AI Fitness & Nutrition Planner",
     description:
       "A Streamlit app that generates personalised weekly workout plans, meal plans, and shopping lists using OpenAI GPT-4o-mini.",
