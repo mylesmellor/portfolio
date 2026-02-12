@@ -22,7 +22,7 @@ const projects = [
     description:
       "A streaming chatbot built with FastAPI and the OpenAI Responses API. Supports assistant, strict, and FAQ modes with session memory.",
     screenshot: null,
-    url: "https://github.com/mylesmellor/portfolio/tree/main/projects/openai%20-%20chatbot%20-%20demo",
+    url: "https://openai-chatbot-demo.onrender.com",
     tags: ["Python", "FastAPI", "OpenAI"],
   },
   {
