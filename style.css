@@ -249,6 +249,39 @@ body::before {
   flex: 1;
 }
 
+/* ---- Filter Bar ---- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.filter-pill {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.filter-pill:hover {
+  color: var(--text);
+  border-color: rgba(109, 93, 252, 0.4);
+  background: rgba(109, 93, 252, 0.08);
+}
+
+.filter-pill.active {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(109, 93, 252, 0.3);
+}
+
 /* ---- Project Grid ---- */
 .project-grid {
   display: grid;
@@ -264,13 +297,44 @@ body::before {
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(109, 93, 252, 0.1);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.45),
+    0 0 24px rgba(109, 93, 252, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
   border-color: var(--accent);
+}
+
+/* ---- Featured Card ---- */
+.card.featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  border: 1px solid rgba(109, 93, 252, 0.15);
+  background: linear-gradient(135deg, rgba(109, 93, 252, 0.06), var(--glass-bg));
+}
+
+.card.featured .card-thumb {
+  aspect-ratio: auto;
+  min-height: 280px;
+}
+
+.card.featured .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card.featured .card-body h2 {
+  font-size: 1.5rem;
+}
+
+.card.featured .card-body p {
+  font-size: 1rem;
 }
 
 .card-thumb {
@@ -281,6 +345,23 @@ body::before {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  position: relative;
+}
+
+.card-thumb::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(to top, var(--bg), transparent);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.card.featured .card-thumb::after {
+  display: none;
 }
 
 .card-thumb img {
@@ -295,7 +376,7 @@ body::before {
 }
 
 .card-body {
-  padding: 1.25rem;
+  padding: 1.5rem;
 }
 
 .card-header {
@@ -309,6 +390,7 @@ body::before {
 .card-body h2 {
   font-size: 1.15rem;
   font-weight: 600;
+  line-height: 1.3;
 }
 
 /* ---- Level badges ---- */
@@ -347,19 +429,20 @@ body::before {
 .highlights {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem;
+  gap: 0.4rem;
   margin-bottom: 0.75rem;
 }
 
 .highlight {
   font-size: 0.72rem;
   color: var(--text-muted);
-  border: 1px solid var(--glass-border);
-  background: var(--glass-bg);
-  padding: 0.15rem 0.5rem;
-  border-radius: 6px;
+  padding: 0.2rem 0.6rem 0.2rem 0.5rem;
+  border-left: 2px solid var(--accent);
+  background: rgba(109, 93, 252, 0.06);
+  border-radius: 0 4px 4px 0;
 }
 
+/* ---- Tech Tags (per-language colors) ---- */
 .card-body .tags {
   display: flex;
   flex-wrap: wrap;
@@ -368,30 +451,45 @@ body::before {
 }
 
 .card-body .tag {
-  background: rgba(109, 93, 252, 0.12);
-  color: var(--accent-hover);
   font-size: 0.75rem;
   padding: 0.2rem 0.55rem;
   border-radius: 999px;
+  font-weight: 500;
 }
 
+.tag-html       { background: rgba(227, 76, 38, 0.12);  color: #e34c26; }
+.tag-css        { background: rgba(38, 77, 228, 0.12);  color: #649cf8; }
+.tag-javascript { background: rgba(240, 219, 79, 0.14); color: #f0db4f; }
+.tag-python     { background: rgba(55, 118, 171, 0.14); color: #5da4d6; }
+.tag-fastapi    { background: rgba(0, 150, 136, 0.12);  color: #26a69a; }
+.tag-openai     { background: rgba(16, 163, 127, 0.12); color: #10a37f; }
+.tag-streamlit  { background: rgba(255, 75, 75, 0.12);  color: #ff4b4b; }
+
+/* ---- Card Link Buttons ---- */
 .card-links {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
+  margin-top: auto;
 }
 
 .card-link {
-  display: inline-block;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.82rem;
+  font-weight: 600;
   text-decoration: none;
-  transition: color 0.15s;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  background: var(--accent);
+  color: #fff;
 }
 
 .card-link:hover {
-  color: var(--accent-hover);
+  background: var(--accent-hover);
+  box-shadow: 0 0 16px rgba(109, 93, 252, 0.25);
 }
 
 .card-link::after {
@@ -399,11 +497,37 @@ body::before {
 }
 
 .card-link-secondary {
+  background: transparent;
+  border: 1px solid var(--glass-border);
   color: var(--text-muted);
 }
 
 .card-link-secondary:hover {
   color: var(--text);
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: none;
+}
+
+/* ---- Staggered card animation ---- */
+.card-animate {
+  opacity: 0;
+  transform: translateY(20px) scale(0.97);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.card-animate.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* ---- Card filter transition ---- */
+.card.hiding {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+  position: absolute;
+  visibility: hidden;
 }
 
 /* ---- Contact Section ---- */
@@ -499,6 +623,35 @@ footer {
 
   .project-grid {
     grid-template-columns: 1fr;
+  }
+
+  .card.featured {
+    grid-template-columns: 1fr;
+  }
+
+  .card.featured .card-thumb {
+    min-height: 180px;
+    aspect-ratio: 16 / 9;
+  }
+
+  .card.featured .card-body h2 {
+    font-size: 1.2rem;
+  }
+
+  .filter-bar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 0.25rem;
+  }
+
+  .filter-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-pill {
+    flex-shrink: 0;
   }
 
   /* Mobile nav */

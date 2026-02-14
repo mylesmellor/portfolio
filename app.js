@@ -1,15 +1,28 @@
 (() => {
   const grid = document.getElementById("project-grid");
+  const filterBar = document.getElementById("filter-bar");
 
-  function esc(str) {
-    const el = document.createElement("span");
-    el.textContent = str;
-    return el.innerHTML;
+  // Tag color map — class suffix per tech label
+  const tagColorMap = {
+    html: "html",
+    css: "css",
+    javascript: "javascript",
+    python: "python",
+    fastapi: "fastapi",
+    openai: "openai",
+    streamlit: "streamlit",
+  };
+
+  function tagClass(tag) {
+    return tagColorMap[tag.toLowerCase()] || "";
   }
 
-  function renderCard({ title, description, screenshot, url, tags, level, highlights, github }) {
+  function renderCard(project, isFeatured) {
+    const { title, description, screenshot, url, tags, level, highlights, github } = project;
+
     const card = document.createElement("article");
-    card.className = "card fade-in";
+    card.className = "card card-animate" + (isFeatured ? " featured" : "");
+    if (tags) card.dataset.tags = tags.map((t) => t.toLowerCase()).join(",");
 
     const thumbDiv = document.createElement("div");
     thumbDiv.className = "card-thumb";
@@ -17,7 +30,7 @@
       const img = document.createElement("img");
       img.src = screenshot;
       img.alt = `${title} screenshot`;
-      img.loading = "lazy";
+      img.loading = isFeatured ? "eager" : "lazy";
       thumbDiv.appendChild(img);
     } else {
       const span = document.createElement("span");
@@ -66,7 +79,8 @@
       tagsDiv.className = "tags";
       tags.forEach((t) => {
         const span = document.createElement("span");
-        span.className = "tag";
+        const colorCls = tagClass(t);
+        span.className = "tag" + (colorCls ? ` tag-${colorCls}` : "");
         span.textContent = t;
         tagsDiv.appendChild(span);
       });
@@ -93,15 +107,91 @@
     }
 
     body.appendChild(links);
-
     card.appendChild(thumbDiv);
     card.appendChild(body);
 
     return card;
   }
 
+  function staggerReveal(cards) {
+    cards.forEach((card) => card.classList.remove("visible"));
+    cards.forEach((card, i) => {
+      setTimeout(() => card.classList.add("visible"), i * 60);
+    });
+  }
+
+  // Extract unique tags from all projects
+  function getUniqueTags(projectList) {
+    const seen = new Set();
+    projectList.forEach((p) => {
+      if (p.tags) p.tags.forEach((t) => seen.add(t));
+    });
+    return Array.from(seen);
+  }
+
+  // Build filter bar
+  function buildFilterBar(projectList) {
+    const tags = getUniqueTags(projectList);
+    filterBar.innerHTML = "";
+
+    const allBtn = document.createElement("button");
+    allBtn.className = "filter-pill active";
+    allBtn.textContent = "All";
+    allBtn.dataset.filter = "all";
+    filterBar.appendChild(allBtn);
+
+    tags.forEach((tag) => {
+      const btn = document.createElement("button");
+      btn.className = "filter-pill";
+      btn.textContent = tag;
+      btn.dataset.filter = tag.toLowerCase();
+      filterBar.appendChild(btn);
+    });
+
+    filterBar.addEventListener("click", (e) => {
+      const pill = e.target.closest(".filter-pill");
+      if (!pill) return;
+
+      filterBar.querySelectorAll(".filter-pill").forEach((p) => p.classList.remove("active"));
+      pill.classList.add("active");
+
+      applyFilter(pill.dataset.filter);
+    });
+  }
+
+  function applyFilter(tag) {
+    const cards = Array.from(grid.querySelectorAll(".card"));
+    const visible = [];
+
+    cards.forEach((card) => {
+      if (tag === "all" || (card.dataset.tags && card.dataset.tags.split(",").includes(tag))) {
+        card.style.display = "";
+        card.classList.remove("hiding");
+        visible.push(card);
+      } else {
+        card.classList.add("hiding");
+        card.style.display = "none";
+      }
+    });
+
+    staggerReveal(visible);
+  }
+
+  // Render projects
   if (typeof projects !== "undefined" && projects.length) {
-    projects.forEach((p) => grid.appendChild(renderCard(p)));
+    // First project is featured
+    grid.appendChild(renderCard(projects[0], true));
+
+    // Remaining projects
+    for (let i = 1; i < projects.length; i++) {
+      grid.appendChild(renderCard(projects[i], false));
+    }
+
+    buildFilterBar(projects);
+
+    // Initial stagger reveal
+    const allCards = Array.from(grid.querySelectorAll(".card"));
+    staggerReveal(allCards);
   }
 
   // Scroll fade-in with IntersectionObserver
@@ -120,7 +210,6 @@
     );
     fadeEls.forEach((el) => observer.observe(el));
   } else {
-    // Fallback: show everything if no IntersectionObserver
     fadeEls.forEach((el) => el.classList.add("visible"));
   }
 
@@ -134,7 +223,6 @@
       navToggle.setAttribute("aria-expanded", isOpen);
     });
 
-    // Close menu when a nav link is tapped
     navLinks.addEventListener("click", (e) => {
       if (e.target.tagName === "A") {
         navLinks.classList.remove("open");
