@@ -9,7 +9,7 @@
 
   function renderCard({ title, description, screenshot, url, tags, level, highlights, github }) {
     const card = document.createElement("article");
-    card.className = "card";
+    card.className = "card fade-in";
 
     const thumbDiv = document.createElement("div");
     thumbDiv.className = "card-thumb";
@@ -102,5 +102,44 @@
 
   if (typeof projects !== "undefined" && projects.length) {
     projects.forEach((p) => grid.appendChild(renderCard(p)));
+  }
+
+  // Scroll fade-in with IntersectionObserver
+  const fadeEls = document.querySelectorAll(".fade-in");
+  if (fadeEls.length && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    fadeEls.forEach((el) => observer.observe(el));
+  } else {
+    // Fallback: show everything if no IntersectionObserver
+    fadeEls.forEach((el) => el.classList.add("visible"));
+  }
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById("nav-toggle");
+  const navLinks = document.getElementById("nav-links");
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      navToggle.setAttribute("aria-expanded", isOpen);
+    });
+
+    // Close menu when a nav link is tapped
+    navLinks.addEventListener("click", (e) => {
+      if (e.target.tagName === "A") {
+        navLinks.classList.remove("open");
+        navToggle.setAttribute("aria-expanded", "false");
+      }
+    });
   }
 })();
