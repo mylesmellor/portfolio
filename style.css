@@ -46,6 +46,38 @@ body {
   font-size: 1.125rem;
 }
 
+/* ---- Social links ---- */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.social-links a:hover {
+  color: var(--text);
+  border-color: var(--accent);
+  background: rgba(109, 93, 252, 0.08);
+}
+
+.social-links svg {
+  flex-shrink: 0;
+}
+
 /* ---- Container ---- */
 .container {
   max-width: 1120px;
@@ -101,16 +133,65 @@ body {
   padding: 1.25rem;
 }
 
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
 .card-body h2 {
   font-size: 1.15rem;
   font-weight: 600;
-  margin-bottom: 0.4rem;
+}
+
+/* ---- Level badges ---- */
+.level {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.level-beginner {
+  background: rgba(52, 211, 153, 0.12);
+  color: #34d399;
+}
+
+.level-intermediate {
+  background: rgba(251, 191, 36, 0.12);
+  color: #fbbf24;
+}
+
+.level-advanced {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
 }
 
 .card-body p {
   color: var(--text-muted);
   font-size: 0.9rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ---- Highlights ---- */
+.highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.highlight {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
 }
 
 .card-body .tags {
@@ -128,6 +209,12 @@ body {
   border-radius: 999px;
 }
 
+.card-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .card-link {
   display: inline-block;
   font-size: 0.875rem;
@@ -143,6 +230,14 @@ body {
 
 .card-link::after {
   content: " \2192";
+}
+
+.card-link-secondary {
+  color: var(--text-muted);
+}
+
+.card-link-secondary:hover {
+  color: var(--text);
 }
 
 /* ---- No-JS fallback ---- */
