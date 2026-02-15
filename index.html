@@ -78,8 +78,8 @@
       </div>
 
       <div class="project-grid">
-        <!-- Todo App (Featured) -->
-        <article class="card featured" data-tags="html,css,javascript">
+        <!-- Todo App -->
+        <article class="card" data-tags="html,css,javascript">
           <div class="card-thumb">
             <img src="assets/screenshots/todo-app.png" alt="Todo App screenshot">
           </div>
@@ -221,5 +221,15 @@
   <footer>
     <p>&copy; 2026 Myles. Built with plain HTML &amp; CSS.</p>
   </footer>
+
+  <script>
+    (() => {
+      const grid = document.querySelector('.project-grid');
+      const cards = [...grid.querySelectorAll('.card')];
+      const pick = cards[Math.floor(Math.random() * cards.length)];
+      pick.classList.add('featured');
+      grid.prepend(pick);
+    })();
+  </script>
 </body>
 </html>
