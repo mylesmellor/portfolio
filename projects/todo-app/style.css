@@ -48,6 +48,22 @@ h1 {
     border-color: #4361ee;
 }
 
+#category-select {
+    padding: 14px 12px;
+    font-size: 0.9rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    background: #fff;
+    color: #1a1a2e;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+#category-select:focus {
+    outline: none;
+    border-color: #4361ee;
+}
+
 #todo-form button {
     padding: 14px 24px;
     font-size: 1rem;
@@ -62,6 +78,36 @@ h1 {
 
 #todo-form button:hover {
     background: #3a56d4;
+}
+
+#filter-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 2px solid #e0e0e0;
+    border-radius: 20px;
+    background: #fff;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.filter-btn:hover {
+    border-color: #4361ee;
+    color: #4361ee;
+}
+
+.filter-btn.active {
+    background: #4361ee;
+    border-color: #4361ee;
+    color: #fff;
 }
 
 #todo-list {
@@ -129,9 +175,25 @@ h1 {
     gap: 4px;
 }
 
+.todo-top-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .todo-content span {
     font-size: 1rem;
     transition: all 0.2s;
+}
+
+.category-badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .todo-content time {

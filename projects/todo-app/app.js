@@ -1,9 +1,19 @@
 const form = document.getElementById("todo-form");
 const input = document.getElementById("todo-input");
+const categorySelect = document.getElementById("category-select");
 const list = document.getElementById("todo-list");
 const emptyState = document.getElementById("empty-state");
+const filterBar = document.getElementById("filter-bar");
 
 let todos = loadTodos();
+let activeFilter = "All";
+
+const categoryColors = {
+    Work: "#4361ee",
+    Coding: "#7209b7",
+    Personal: "#f77f00",
+    Fitness: "#06d6a0",
+};
 
 function loadTodos() {
     try {
@@ -18,8 +28,18 @@ function saveTodos() {
     localStorage.setItem("todos", JSON.stringify(todos));
 }
 
+function getFilteredTodos() {
+    if (activeFilter === "All") return todos;
+    return todos.filter((t) => t.category === activeFilter);
+}
+
 function updateEmptyState() {
-    emptyState.classList.toggle("hidden", todos.length > 0);
+    const filtered = getFilteredTodos();
+    emptyState.classList.toggle("hidden", filtered.length > 0);
+    emptyState.textContent =
+        filtered.length === 0 && todos.length > 0
+            ? `No ${activeFilter} tasks.`
+            : "No tasks yet. Add one above!";
 }
 
 function createTodoElement(todo) {
@@ -40,13 +60,23 @@ function createTodoElement(todo) {
     const content = document.createElement("div");
     content.className = "todo-content";
 
+    const topRow = document.createElement("div");
+    topRow.className = "todo-top-row";
+
     const span = document.createElement("span");
     span.textContent = todo.text;
+
+    const badge = document.createElement("span");
+    badge.className = "category-badge";
+    badge.textContent = todo.category;
+    badge.style.background = categoryColors[todo.category] || "#888";
+
+    topRow.append(span, badge);
 
     const time = document.createElement("time");
     time.textContent = new Date(todo.createdAt).toLocaleString();
 
-    content.append(span, time);
+    content.append(topRow, time);
 
     const deleteBtn = document.createElement("button");
     deleteBtn.className = "delete-btn";
@@ -71,19 +101,37 @@ function createTodoElement(todo) {
 
 function render() {
     list.innerHTML = "";
-    todos.forEach((todo) => list.appendChild(createTodoElement(todo)));
+    getFilteredTodos().forEach((todo) => list.appendChild(createTodoElement(todo)));
     updateEmptyState();
 }
+
+filterBar.addEventListener("click", (e) => {
+    const btn = e.target.closest(".filter-btn");
+    if (!btn) return;
+    activeFilter = btn.dataset.category;
+    filterBar.querySelector(".active").classList.remove("active");
+    btn.classList.add("active");
+    render();
+});
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     const text = input.value.trim();
     if (!text) return;
 
-    const todo = { id: crypto.randomUUID(), text, completed: false, createdAt: new Date().toISOString() };
+    const todo = {
+        id: crypto.randomUUID(),
+        text,
+        completed: false,
+        category: categorySelect.value,
+        createdAt: new Date().toISOString(),
+    };
     todos.push(todo);
-    list.appendChild(createTodoElement(todo));
     saveTodos();
+
+    if (activeFilter === "All" || activeFilter === todo.category) {
+        list.appendChild(createTodoElement(todo));
+    }
     updateEmptyState();
     input.value = "";
     input.focus();

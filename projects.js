@@ -15,12 +15,12 @@ const projects = [
   {
     title: "Todo App",
     description:
-      "A clean task manager with add, complete, and delete functionality. Persists tasks in localStorage.",
+      "A clean task manager with add, complete, and delete functionality. Features color-coded categories, filtering, and localStorage persistence.",
     screenshot: "assets/screenshots/todo-app.png",
     url: "projects/todo-app/index.html",
     tags: ["HTML", "CSS", "JavaScript"],
     level: "Beginner",
-    highlights: ["DOM manipulation", "localStorage persistence", "ARIA accessibility"],
+    highlights: ["DOM manipulation", "localStorage persistence", "Category filtering", "ARIA accessibility"],
     github: "https://github.com/mylesmellor/portfolio/tree/main/projects/todo-app",
   },
   {

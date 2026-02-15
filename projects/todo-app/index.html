@@ -11,8 +11,21 @@
         <h1>Todo</h1>
         <form id="todo-form">
             <input type="text" id="todo-input" placeholder="Add a new task..." autocomplete="off">
+            <select id="category-select">
+                <option value="Work">Work</option>
+                <option value="Coding">Coding</option>
+                <option value="Personal">Personal</option>
+                <option value="Fitness">Fitness</option>
+            </select>
             <button type="submit">Add</button>
         </form>
+        <div id="filter-bar">
+            <button class="filter-btn active" data-category="All">All</button>
+            <button class="filter-btn" data-category="Work">Work</button>
+            <button class="filter-btn" data-category="Coding">Coding</button>
+            <button class="filter-btn" data-category="Personal">Personal</button>
+            <button class="filter-btn" data-category="Fitness">Fitness</button>
+        </div>
         <ul id="todo-list"></ul>
         <p id="empty-state">No tasks yet. Add one above!</p>
     </div>
