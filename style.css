@@ -15,7 +15,7 @@
   --text-muted: #a1a1aa;
   --accent: #6d5dfc;
   --accent-hover: #8577fd;
-  --accent2: #2dd4bf;
+  --accent2: #f43f5e;
   --radius: 12px;
   --glass-bg: rgba(255, 255, 255, 0.04);
   --glass-border: rgba(255, 255, 255, 0.06);
@@ -577,7 +577,7 @@ body::after {
 
 .highlight:nth-child(even) {
   border-left-color: var(--accent2);
-  background: rgba(45, 212, 191, 0.06);
+  background: rgba(244, 63, 94, 0.06);
 }
 
 /* ---- Tech Tags (per-language colors) ---- */
@@ -714,8 +714,8 @@ body::after {
 
 .contact-link[href^="mailto"]:hover {
   border-color: var(--accent2);
-  background: rgba(45, 212, 191, 0.1);
-  box-shadow: 0 0 16px rgba(45, 212, 191, 0.2);
+  background: rgba(244, 63, 94, 0.1);
+  box-shadow: 0 0 16px rgba(244, 63, 94, 0.2);
 }
 
 .contact-link svg {
