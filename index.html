@@ -264,6 +264,21 @@
     <p>&copy; 2026 Myles. Built with plain HTML &amp; CSS.</p>
   </footer>
 
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <img src="assets/profile.jpeg" alt="Myles Mellor">
+    <p class="lightbox-caption">Profile photo adapted using Nano Banana.</p>
+  </div>
+
+  <script>
+    (() => {
+      const lb = document.getElementById('lightbox');
+      document.querySelector('.about-avatar').addEventListener('click', () => lb.classList.add('open'));
+      lb.querySelector('.lightbox-close').addEventListener('click', () => lb.classList.remove('open'));
+      lb.addEventListener('click', (e) => { if (e.target === lb) lb.classList.remove('open'); });
+    })();
+  </script>
+
   <script>
     (() => {
       const grid = document.querySelector('.project-grid');
