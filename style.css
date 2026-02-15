@@ -97,11 +97,13 @@ body::before {
   background: rgba(255, 255, 255, 0.06);
 }
 
-/* Hamburger */
+/* ---- CSS-only mobile nav toggle ---- */
+.nav-check {
+  display: none;
+}
+
 .nav-toggle {
   display: none;
-  background: none;
-  border: none;
   cursor: pointer;
   padding: 0.5rem;
 }
@@ -136,17 +138,17 @@ body::before {
   top: 6px;
 }
 
-/* Hamburger open state */
-.nav-toggle[aria-expanded="true"] .hamburger {
+/* Hamburger → X when checked */
+.nav-check:checked ~ .nav-toggle .hamburger {
   background: transparent;
 }
 
-.nav-toggle[aria-expanded="true"] .hamburger::before {
+.nav-check:checked ~ .nav-toggle .hamburger::before {
   top: 0;
   transform: rotate(45deg);
 }
 
-.nav-toggle[aria-expanded="true"] .hamburger::after {
+.nav-check:checked ~ .nav-toggle .hamburger::after {
   top: 0;
   transform: rotate(-45deg);
 }
@@ -249,7 +251,11 @@ body::before {
   flex: 1;
 }
 
-/* ---- Filter Bar ---- */
+/* ---- CSS-only Filter ---- */
+.filter-input {
+  display: none;
+}
+
 .filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -275,11 +281,30 @@ body::before {
   background: rgba(109, 93, 252, 0.08);
 }
 
-.filter-pill.active {
+/* Active pill styling via checked radio */
+#filter-all:checked ~ .filter-bar label[for="filter-all"],
+#filter-html:checked ~ .filter-bar label[for="filter-html"],
+#filter-css:checked ~ .filter-bar label[for="filter-css"],
+#filter-javascript:checked ~ .filter-bar label[for="filter-javascript"],
+#filter-python:checked ~ .filter-bar label[for="filter-python"],
+#filter-fastapi:checked ~ .filter-bar label[for="filter-fastapi"],
+#filter-openai:checked ~ .filter-bar label[for="filter-openai"],
+#filter-streamlit:checked ~ .filter-bar label[for="filter-streamlit"] {
   color: #fff;
   background: var(--accent);
   border-color: var(--accent);
   box-shadow: 0 0 12px rgba(109, 93, 252, 0.3);
+}
+
+/* Hide non-matching cards when a filter is active */
+#filter-html:checked ~ .project-grid .card:not([data-tags*="html"]),
+#filter-css:checked ~ .project-grid .card:not([data-tags*="css"]),
+#filter-javascript:checked ~ .project-grid .card:not([data-tags*="javascript"]),
+#filter-python:checked ~ .project-grid .card:not([data-tags*="python"]),
+#filter-fastapi:checked ~ .project-grid .card:not([data-tags*="fastapi"]),
+#filter-openai:checked ~ .project-grid .card:not([data-tags*="openai"]),
+#filter-streamlit:checked ~ .project-grid .card:not([data-tags*="streamlit"]) {
+  display: none;
 }
 
 /* ---- Project Grid ---- */
@@ -298,6 +323,7 @@ body::before {
   border-radius: var(--radius);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  animation: card-enter 0.5s ease both;
 }
 
 .card:hover {
@@ -307,6 +333,23 @@ body::before {
     0 0 24px rgba(109, 93, 252, 0.12),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   border-color: var(--accent);
+}
+
+/* Staggered card entrance animation */
+.card:nth-child(1) { animation-delay: 0s; }
+.card:nth-child(2) { animation-delay: 0.08s; }
+.card:nth-child(3) { animation-delay: 0.16s; }
+.card:nth-child(4) { animation-delay: 0.24s; }
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 /* ---- Featured Card ---- */
@@ -509,25 +552,25 @@ body::before {
   box-shadow: none;
 }
 
-/* ---- Staggered card animation ---- */
-.card-animate {
-  opacity: 0;
-  transform: translateY(20px) scale(0.97);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+/* ---- Section entrance animations ---- */
+.about-card,
+.section-heading,
+.contact-inner {
+  animation: fade-up 0.6s ease both;
 }
 
-.card-animate.visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
+.about-card { animation-delay: 0.1s; }
+.contact-inner { animation-delay: 0.1s; }
 
-/* ---- Card filter transition ---- */
-.card.hiding {
-  opacity: 0;
-  transform: scale(0.95);
-  pointer-events: none;
-  position: absolute;
-  visibility: hidden;
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ---- Contact Section ---- */
@@ -582,26 +625,6 @@ body::before {
   flex-shrink: 0;
 }
 
-/* ---- Scroll fade-in ---- */
-.fade-in {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ---- No-JS fallback ---- */
-.no-js {
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  padding: 3rem 1rem;
-}
-
 /* ---- Footer ---- */
 footer {
   text-align: center;
@@ -654,7 +677,7 @@ footer {
     flex-shrink: 0;
   }
 
-  /* Mobile nav */
+  /* Mobile nav — CSS-only toggle */
   .nav-toggle {
     display: block;
   }
@@ -673,7 +696,7 @@ footer {
     padding: 0.5rem 0;
   }
 
-  .nav-links.open {
+  .nav-check:checked ~ .nav-links {
     display: flex;
   }
 

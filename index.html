@@ -10,10 +10,11 @@
   <nav class="nav" id="nav">
     <div class="nav-inner">
       <a href="#" class="nav-logo">Myles</a>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <input type="checkbox" id="nav-check" class="nav-check">
+      <label for="nav-check" class="nav-toggle" aria-label="Toggle menu">
         <span class="hamburger"></span>
-      </button>
-      <ul class="nav-links" id="nav-links">
+      </label>
+      <ul class="nav-links">
         <li><a href="#projects">Projects</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -44,7 +45,7 @@
   </header>
 
   <section class="about-section" id="about">
-    <div class="about-card fade-in">
+    <div class="about-card">
       <h2 class="section-heading">About Me</h2>
       <p>I'm a self-taught developer with a passion for building things on the web. I got into coding by tinkering with small projects, and I've been hooked ever since.</p>
       <p>Right now I'm focused on web development and exploring how AI can be woven into real applications. Every project I ship teaches me something new — and that's the whole point.</p>
@@ -53,15 +54,151 @@
   </section>
 
   <main class="container" id="projects">
-    <h2 class="section-heading fade-in">Projects</h2>
-    <div class="filter-bar fade-in" id="filter-bar"></div>
-    <div class="project-grid" id="project-grid">
-      <noscript><p class="no-js">Please enable JavaScript to view the projects.</p></noscript>
+    <h2 class="section-heading">Projects</h2>
+
+    <div class="filter-wrapper">
+      <input type="radio" name="filter" id="filter-all" class="filter-input" checked>
+      <input type="radio" name="filter" id="filter-html" class="filter-input">
+      <input type="radio" name="filter" id="filter-css" class="filter-input">
+      <input type="radio" name="filter" id="filter-javascript" class="filter-input">
+      <input type="radio" name="filter" id="filter-python" class="filter-input">
+      <input type="radio" name="filter" id="filter-fastapi" class="filter-input">
+      <input type="radio" name="filter" id="filter-openai" class="filter-input">
+      <input type="radio" name="filter" id="filter-streamlit" class="filter-input">
+
+      <div class="filter-bar">
+        <label for="filter-all" class="filter-pill">All</label>
+        <label for="filter-html" class="filter-pill">HTML</label>
+        <label for="filter-css" class="filter-pill">CSS</label>
+        <label for="filter-javascript" class="filter-pill">JavaScript</label>
+        <label for="filter-python" class="filter-pill">Python</label>
+        <label for="filter-fastapi" class="filter-pill">FastAPI</label>
+        <label for="filter-openai" class="filter-pill">OpenAI</label>
+        <label for="filter-streamlit" class="filter-pill">Streamlit</label>
+      </div>
+
+      <div class="project-grid">
+        <!-- Todo App (Featured) -->
+        <article class="card featured" data-tags="html,css,javascript">
+          <div class="card-thumb">
+            <img src="assets/screenshots/todo-app.png" alt="Todo App screenshot">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <h2>Todo App</h2>
+              <span class="level level-beginner">Beginner</span>
+            </div>
+            <p>A clean task manager with add, complete, and delete functionality. Features color-coded categories, filtering, and localStorage persistence.</p>
+            <div class="highlights">
+              <span class="highlight">DOM manipulation</span>
+              <span class="highlight">localStorage persistence</span>
+              <span class="highlight">Category filtering</span>
+              <span class="highlight">ARIA accessibility</span>
+            </div>
+            <div class="tags">
+              <span class="tag tag-html">HTML</span>
+              <span class="tag tag-css">CSS</span>
+              <span class="tag tag-javascript">JavaScript</span>
+            </div>
+            <div class="card-links">
+              <a class="card-link" href="projects/todo-app/index.html">Open project</a>
+              <a class="card-link card-link-secondary" href="https://github.com/mylesmellor/portfolio/tree/main/projects/todo-app" target="_blank" rel="noopener noreferrer">View source</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- OpenAI Chatbot Demo -->
+        <article class="card" data-tags="python,fastapi,openai">
+          <div class="card-thumb">
+            <img src="assets/screenshots/openai-chatbot.png" alt="OpenAI Chatbot Demo screenshot" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <h2>OpenAI Chatbot Demo</h2>
+              <span class="level level-intermediate">Intermediate</span>
+            </div>
+            <p>A streaming chatbot built with FastAPI and the OpenAI Responses API. Supports assistant, strict, and FAQ modes with session memory.</p>
+            <div class="highlights">
+              <span class="highlight">REST API design</span>
+              <span class="highlight">Streaming responses</span>
+              <span class="highlight">Session management</span>
+              <span class="highlight">Cloud deployment</span>
+            </div>
+            <div class="tags">
+              <span class="tag tag-python">Python</span>
+              <span class="tag tag-fastapi">FastAPI</span>
+              <span class="tag tag-openai">OpenAI</span>
+            </div>
+            <div class="card-links">
+              <a class="card-link" href="https://openai-chatbot-demo-9mvg.onrender.com">Open project</a>
+              <a class="card-link card-link-secondary" href="https://github.com/mylesmellor/portfolio/tree/main/projects/openai%20-%20chatbot%20-%20demo" target="_blank" rel="noopener noreferrer">View source</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- AI Fitness & Nutrition Planner -->
+        <article class="card" data-tags="python,streamlit,openai">
+          <div class="card-thumb">
+            <img src="assets/screenshots/ai-fitness-planner.png" alt="AI Fitness & Nutrition Planner screenshot" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <h2>AI Fitness & Nutrition Planner</h2>
+              <span class="level level-intermediate">Intermediate</span>
+            </div>
+            <p>A Streamlit app that generates personalised weekly workout plans, meal plans, and shopping lists using OpenAI GPT-4o-mini.</p>
+            <div class="highlights">
+              <span class="highlight">Prompt engineering</span>
+              <span class="highlight">Structured AI output</span>
+              <span class="highlight">Data validation</span>
+              <span class="highlight">CSV data storage</span>
+            </div>
+            <div class="tags">
+              <span class="tag tag-python">Python</span>
+              <span class="tag tag-streamlit">Streamlit</span>
+              <span class="tag tag-openai">OpenAI</span>
+            </div>
+            <div class="card-links">
+              <a class="card-link" href="https://ai-fitness-planner-pfbqe9yprypbcao6oemcip.streamlit.app/">Open project</a>
+              <a class="card-link card-link-secondary" href="https://github.com/mylesmellor/portfolio/tree/main/projects/ai%20fitness%20planner" target="_blank" rel="noopener noreferrer">View source</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pomodoro Timer -->
+        <article class="card" data-tags="html,css,javascript">
+          <div class="card-thumb">
+            <img src="assets/screenshots/pomodoro-timer.png" alt="Pomodoro Timer screenshot" loading="lazy">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <h2>Pomodoro Timer</h2>
+              <span class="level level-beginner">Beginner</span>
+            </div>
+            <p>A focused productivity timer with work/break modes, circular progress ring, audio notifications, and session tracking.</p>
+            <div class="highlights">
+              <span class="highlight">SVG animation</span>
+              <span class="highlight">Web Audio API</span>
+              <span class="highlight">State management</span>
+              <span class="highlight">Keyboard shortcuts</span>
+            </div>
+            <div class="tags">
+              <span class="tag tag-html">HTML</span>
+              <span class="tag tag-css">CSS</span>
+              <span class="tag tag-javascript">JavaScript</span>
+            </div>
+            <div class="card-links">
+              <a class="card-link" href="projects/pomodoro-timer/index.html">Open project</a>
+              <a class="card-link card-link-secondary" href="https://github.com/mylesmellor/portfolio/tree/main/projects/pomodoro-timer" target="_blank" rel="noopener noreferrer">View source</a>
+            </div>
+          </div>
+        </article>
+      </div>
     </div>
   </main>
 
   <section class="contact-section" id="contact">
-    <div class="contact-inner fade-in">
+    <div class="contact-inner">
       <h2 class="section-heading">Get in Touch</h2>
       <p class="contact-message">Want to collaborate or have feedback? Feel free to reach out.</p>
       <div class="contact-links">
@@ -82,10 +219,7 @@
   </section>
 
   <footer>
-    <p>&copy; 2026 Myles. Built with plain HTML, CSS &amp; JS.</p>
+    <p>&copy; 2026 Myles. Built with plain HTML &amp; CSS.</p>
   </footer>
-
-  <script src="projects.js"></script>
-  <script src="app.js"></script>
 </body>
 </html>
