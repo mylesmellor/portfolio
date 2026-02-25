@@ -640,6 +640,31 @@ body::after {
   padding: 1.5rem;
 }
 
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
+}
+
+.category-ai {
+  background: rgba(109, 93, 252, 0.15);
+  color: #a78bfa;
+  border: 1px solid rgba(109, 93, 252, 0.25);
+}
+
+.category-web {
+  background: rgba(59, 130, 246, 0.12);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
 .card-header {
   display: flex;
   align-items: center;
