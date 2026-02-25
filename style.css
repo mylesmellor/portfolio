@@ -265,6 +265,47 @@ body::after {
   background: linear-gradient(90deg, var(--accent), var(--accent2));
 }
 
+/* ---- Project Sections ---- */
+.project-section {
+  margin-bottom: 5rem;
+}
+
+.project-section-header {
+  margin-bottom: 2rem;
+}
+
+.project-section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  margin-bottom: 0.75rem;
+}
+
+.project-section-label-ai {
+  background: rgba(109, 93, 252, 0.15);
+  color: #a78bfa;
+  border: 1px solid rgba(109, 93, 252, 0.25);
+}
+
+.project-section-label-web {
+  background: rgba(59, 130, 246, 0.12);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.project-section-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+  max-width: 560px;
+}
+
 /* ---- Services Strip ---- */
 .services-strip {
   padding: 4rem 1.5rem;
