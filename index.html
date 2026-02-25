@@ -351,16 +351,6 @@
   </script>
 
   <script>
-    (() => {
-      const grid = document.querySelector('.project-grid');
-      const cards = [...grid.querySelectorAll('.card')];
-      const pick = cards[Math.floor(Math.random() * cards.length)];
-      pick.classList.add('featured');
-      grid.prepend(pick);
-    })();
-  </script>
-
-  <script>
     // Scroll-triggered reveal animations
     (() => {
       const els = document.querySelectorAll('.reveal');
