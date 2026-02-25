@@ -461,7 +461,9 @@ body::after {
 #filter-python:checked ~ .filter-bar label[for="filter-python"],
 #filter-fastapi:checked ~ .filter-bar label[for="filter-fastapi"],
 #filter-openai:checked ~ .filter-bar label[for="filter-openai"],
-#filter-streamlit:checked ~ .filter-bar label[for="filter-streamlit"] {
+#filter-streamlit:checked ~ .filter-bar label[for="filter-streamlit"],
+#filter-nodejs:checked ~ .filter-bar label[for="filter-nodejs"],
+#filter-express:checked ~ .filter-bar label[for="filter-express"] {
   color: #fff;
   background: var(--accent);
   border-color: var(--accent);
@@ -475,7 +477,9 @@ body::after {
 #filter-python:checked ~ .project-grid .card:not([data-tags*="python"]),
 #filter-fastapi:checked ~ .project-grid .card:not([data-tags*="fastapi"]),
 #filter-openai:checked ~ .project-grid .card:not([data-tags*="openai"]),
-#filter-streamlit:checked ~ .project-grid .card:not([data-tags*="streamlit"]) {
+#filter-streamlit:checked ~ .project-grid .card:not([data-tags*="streamlit"]),
+#filter-nodejs:checked ~ .project-grid .card:not([data-tags*="nodejs"]),
+#filter-express:checked ~ .project-grid .card:not([data-tags*="express"]) {
   display: none;
 }
 

@@ -1,0 +1,14 @@
+{
+  "name": "portfolio",
+  "description": "Personal portfolio website v1",
+  "status": "stalled",
+  "completionLevel": 80,
+  "priority": "low",
+  "lastWorkedOn": "2025-10-01",
+  "learningValue": "low",
+  "goals": ["Showcase projects and skills"],
+  "nextSteps": ["Replaced by portfolio-v2"],
+  "deploymentUrl": "",
+  "githubUrl": "",
+  "tags": ["web", "portfolio"]
+}
